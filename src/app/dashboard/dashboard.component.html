@@ -1,0 +1,38 @@
+<section class="dashboard" #dash>
+        <div class="cont">
+            <img src="../../assets/Helwan.png" alt="Helwan University">
+            <div class="icon">
+                <i class="fa-solid fa-house"></i>
+                <a routerLink="/admin-dashboard">Dashboard</a>
+            </div>
+            <div class="icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <a routerLink="/students">Students</a>
+            </div>
+            <div class="icon">
+                <i class="fa-solid fa-user-group"></i>
+                <a routerLink="/teachers">Teachers</a>
+            </div>
+            <div class="icon">
+                <i class="fa-solid fa-table"></i>
+                <a routerLink="/timetable">TimeTable</a>
+            </div>
+            <div class="icon">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <a>Announcements</a>
+            </div>
+        </div>
+        <div class="cont">
+            <div class="icon">
+                <i class="fa-solid fa-circle-info"></i>
+                <a>Help</a>
+            </div>
+            <div class="icon">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <a>Logout</a>
+            </div>
+        </div>
+</section>
+
+<i class="fa-solid fa-xmark xmark" #xmark (click)="toggleSidebar(dash, xmark)"></i>
+<i class="fa-solid fa-bars free" (click)="toggleSidebar(dash, xmark)"></i>

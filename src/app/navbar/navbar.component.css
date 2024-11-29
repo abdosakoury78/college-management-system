@@ -1,0 +1,60 @@
+.info {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+}
+
+.info p {
+    font-weight: bold;
+}
+
+.admin img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-top: -10px;
+}
+
+.profile {
+    display: flex;
+    gap: 40px;
+}
+
+.admin {
+    display: flex;
+    margin: 0 40px;
+}
+
+.adminName {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-top: -10px;
+    color: black;
+    font-weight: bold;
+}
+
+.adminName p:last-child {
+    margin-top: -10px;
+    font-weight: normal;
+    color: #777777;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .info p {
+        display: none;
+    }
+
+    .adminName p {
+        display: block;
+    }
+
+    .profile {
+        gap: 0;
+    }
+
+    .info {
+        justify-content: flex-end;
+    }
+}

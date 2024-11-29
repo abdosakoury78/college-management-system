@@ -1,0 +1,96 @@
+.dashboard {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* background-color: blue; */
+    width: fit-content;
+    position: absolute;
+    border-right: #a0a0a0 solid 1px;
+    background-color: white;
+    transition: 0.3s;
+}
+
+.dashboard .cont img {
+    width: 140px;
+    margin: 20px;
+    text-align: center;
+}
+
+.icon {
+    display: flex;
+    gap: 10px;
+    padding: 0 20px;
+    /* background-color: blue; */
+    width: 100%;
+    color: #777777;
+    margin: 10px 0;
+    transition: 0.3s;
+}
+
+.icon i {
+    margin: 13px 0 0 20px;
+}
+.icon a {
+    margin-top: 8px;
+    text-decoration: none;
+    color: #777777;
+}
+.icon:hover, .icon:hover a {
+    color: black;
+}
+.cont:last-child {
+    margin-bottom: 80px;
+}
+
+.free, .xmark {
+    position: absolute;
+    font-size: 30px;
+    cursor: pointer;
+    top: 15px;
+    left: 10px;
+    display: none;
+}
+
+.xmark {
+    z-index: 99;
+}
+
+@media only screen and (max-width: 600px) {
+    .free {
+        display: block;
+    }
+    .dashboard {
+        width: 0;
+        z-index: 99;
+        visibility: hidden;
+        text-align: center;
+        gap: 30px;
+        justify-content: center;
+    }
+    .dashboard.open {
+        width: 100vw;
+        visibility: visible;
+    }
+
+    .dashboard .cont {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .dashboard .icon {
+        padding: 10px 0;
+        transition: 0.3s;
+    }
+
+    .dashboard .icon a {
+        margin-top: 10px;
+    }
+
+    .dashboard .icon:hover {
+        background-color: #3a86ff;
+        color: black;
+    }
+}

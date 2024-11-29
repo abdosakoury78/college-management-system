@@ -1,0 +1,159 @@
+
+.students {
+    /* background-color: red; */
+    width: 100%;
+    /* margin-left: 13.0%; */
+    background-color: #ebecee;
+    min-height: 100vh;
+}
+
+.main {
+    margin-left: 13%;
+}
+
+/* setting part */
+.setting {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.del {
+    color: black;
+    background-color: white;
+    transition: 0.3s;
+}
+
+.del:hover {
+    color: white;
+    background-color: black;
+}
+
+.setting .form-select {
+    width: fit-content;
+}
+
+/* form part */
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    /* height: 100%; */
+    height: 0;
+    visibility: hidden;
+    margin: 0;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.418);
+    top: 0;
+    left: 0;
+    transition: 0.5s;
+    z-index: 99;
+}
+
+form {
+    width: 400px;
+    height: 500px;
+    background-color: #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    border-radius: 10px;
+}
+
+form p {
+    font-size: 30px;
+}
+
+form input {
+    padding: 10px 15px;
+    outline: none;
+    border: solid black 1px;
+    border-radius: 8px;
+}
+
+form input:focus {
+    outline: solid black 1px;
+}
+
+
+/* students show part */
+.studentsCard {
+    background-color: white;
+    border: black solid 1px;
+    margin-top: 50px;
+    height: 70vh;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 20px;
+}
+
+.studentCard {
+    width: 400px;
+    /* padding: 20px; */
+    border: 1px solid black;
+    height: fit-content;
+    position: relative;
+    background-color: #f5f4f4;
+    transition: 0.5s;
+}
+
+.studentCard:hover {
+    outline: 1px solid black;
+}
+
+.studentCard .img {
+    width: 100%;
+    background-color: black;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.studentCard img {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 100px;
+}
+
+.qrCode {
+    background-color: black;
+    width: 200px;
+    height: 30px;
+    align-self: center;
+    justify-self: center;
+    margin-bottom:15px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.line {
+    background-color: #f5f4f4;
+    height: 100%;
+    /* width: 1px; */
+}
+
+/* alert */
+.alert {
+    position: absolute;
+    top: 0;
+    left: 40%;
+    transition: 0.3s;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .main {
+        margin: 0;
+        width: 100vw;
+    }
+
+    .alert {
+        left: 20%;
+    }
+}

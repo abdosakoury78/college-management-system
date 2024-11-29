@@ -1,0 +1,89 @@
+<section class="teachers">
+    <div class="main">
+        <app-navbar></app-navbar>
+
+        <!-- student settings -->
+        <div class="container setting">
+            <button class="btn btn-dark" (click)="showForm(form, $event)">Add</button>
+            <button class="btn btn-dark" (click)="update(form, $event)">Update</button>
+            <button class="btn btn-dark del" (click)="delCard(form, $event)">Delete</button>
+        </div>
+
+        <!-- form for teacher -->
+        <div class="form" #form>
+            <form action="">
+                <p>{{title}} Teacher</p>
+                <input type="text" name="name" id="name" placeholder="Name" autocomplete="off">
+                <input type="email" name="email" id="email" placeholder="Email" autocomplete="off">
+                <input type="text" name="password" id="password" placeholder="Password" autocomplete="off">
+                <input type="text" name="subject" id="subject" placeholder="Subject" autocomplete="off">
+                <div class="btns">
+                    <button class="btn btn-dark">{{btn}}</button>
+                    <button class="btn btn-dark del ms-4" (click)="showForm(form, $event)">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+
+        <!-- alert -->
+        <div class="alert alert-dark alert-dismissible fade show" role="alert" [style.transform]="alert ? 'translateY(50px)' : 'translateY(-100px)'">
+            {{sentence}}
+            <button type="button" class="btn-close" (click)="closeAlert()"></button>
+        </div>
+
+
+        <!-- table for teachers -->
+        <div class="container teacher-table">
+            <div class="details">
+                <p class="ms-3">Name</p>
+                <p class="">ID</p>
+                <p class="me-2">Subject</p>
+            </div>
+            <div class="table" (click)="cardClicked()">
+                <p class="ms-2"><span>1</span> Ali Ahmad</p>
+                <p class="ms-5">1001</p>
+                <p>Software Engineering</p>
+            </div>
+            <div class="table">
+                <p class="ms-2"><span>1</span> Ali Ahmad</p>
+                <p class="ms-5">1001</p>
+                <p>Software Engineering</p>
+            </div>
+            <div class="table">
+                <p class="ms-2"><span>1</span> Ali Ahmad</p>
+                <p class="ms-5">1001</p>
+                <p>Software Engineering</p>
+            </div>
+            <div class="table">
+                <p class="ms-2"><span>1</span> Ali Ahmad</p>
+                <p class="ms-5">1001</p>
+                <p>Software Engineering</p>
+            </div>
+            <div class="table">
+                <p class="ms-2"><span>1</span> Ali Ahmad</p>
+                <p class="ms-5">1001</p>
+                <p>Software Engineering</p>
+            </div>
+            <div class="table">
+                <p class="ms-2"><span>1</span> Ali Ahmad</p>
+                <p class="ms-5">1001</p>
+                <p>Software Engineering</p>
+            </div>
+            <div class="table">
+                <p class="ms-2"><span>1</span> Ali Ahmad</p>
+                <p class="ms-5">1001</p>
+                <p>Software Engineering</p>
+            </div>
+            <div class="table">
+                <p class="ms-2"><span>1</span> Ali Ahmad</p>
+                <p class="ms-5">1001</p>
+                <p>Software Engineering</p>
+            </div>
+            <div class="table">
+                <p class="ms-2"><span>1</span> Ali Ahmad</p>
+                <p class="ms-5">1001</p>
+                <p>Software Engineering</p>
+            </div>
+        </div>
+    </div>
+</section>

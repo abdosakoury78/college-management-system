@@ -1,0 +1,112 @@
+
+.main {
+    /* background-color: red; */
+    width: 100%;
+    margin-left: 13.0%;
+    background-color: rgb(235, 236, 238);
+}
+
+.admin-cont {
+    display: flex;
+    height: 100vh;
+}
+
+/* welcomeCont */
+.welcomeCont {
+    display: flex;
+    width: 100%;
+    /* background-color: black; */
+    /* justify-content: space-evenly; */
+    padding: 20px 60px;
+}
+
+.welcomeCont .container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 30px 20px;
+    border-radius: 20px;
+    background-image: url("../../assets/students.jpg");
+    background-position: center;
+    background-size: cover;
+    position: relative;
+
+}
+
+.welcome p{
+    margin-bottom: 20px;
+    color: #e1dfdf;
+}
+
+.welcome h1 {
+    color: white;
+}
+.welcome {
+    z-index: 10;
+}
+
+.welcomeCont .container::after {
+    content: '';
+    background-color: rgba(0, 0, 0, 0.434);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-radius: 20px;
+}
+
+
+/* NumbersPart */
+.numbersCount {
+    display: flex;
+    justify-content: center;
+}
+
+.numbersCount .boxes {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.box {
+    display: flex;
+    /* flex-wrap: wrap; */
+    gap: 20px;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.265);
+    padding: 20px 40px;
+    border-radius: 10px;
+}
+
+.box i {
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+.number p {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+    .main {
+        margin: 0;
+        width: 100vw;
+    }
+
+    .welcomeCont  {
+        padding: 0;
+    }
+
+    .welcomeCont .container {
+        border-radius: 0;
+    }
+
+    .welcomeCont .container::after {
+        border-radius: 0;
+    }
+}
