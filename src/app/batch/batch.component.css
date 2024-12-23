@@ -51,7 +51,7 @@
 
 form {
     width: 400px;
-    height: 400px;
+    height: 500px;
     background-color: #f1f1f1;
     display: flex;
     flex-direction: column;
@@ -112,7 +112,7 @@ form input:focus {
 .teacher-table .table {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
     font-weight: bold;
     background-color: #f1f1f1;
     border-radius: 8px;
@@ -129,6 +129,16 @@ form input:focus {
     border-right: #777777 1px solid;
     padding-right: 10px;
     font-weight: normal;
+}
+
+.table p:nth-child(1),
+.table p:nth-child(3) {
+    /* background-color: red; */
+    width: 400px;
+}
+.table p:nth-child(3) {
+    /* justify-self: flex-end; */
+    text-align: end;
 }
 
 

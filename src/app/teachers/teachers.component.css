@@ -76,6 +76,9 @@ form input:focus {
     outline: solid black 1px;
 }
 
+.form-select {
+    width: fit-content;
+}
 
 
 /* alert */
@@ -84,6 +87,7 @@ form input:focus {
     top: 0;
     left: 40%;
     transition: 0.3s;
+    z-index: 99;
 }
 
 /* table for teachers */
@@ -112,6 +116,7 @@ form input:focus {
 .teacher-table .table {
     display: flex;
     justify-content: space-between;
+    /* flex-wrap: wrap; */
     align-items: center;
     font-weight: bold;
     background-color: #f1f1f1;
@@ -131,6 +136,50 @@ form input:focus {
     font-weight: normal;
 }
 
+.table p:nth-child(1),
+.table p:nth-child(3) {
+    /* background-color: red; */
+    width: 400px;
+}
+.table p:nth-child(3) {
+    /* justify-self: flex-end; */
+    text-align: end;
+}
+
+.subject {
+    font-weight: bold;
+    background-color: #f1f1f1;
+    /* font-size: 14px; */
+    border-radius: 8px;
+    padding: 10px 5px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 10px;
+}
+
+.fa-xmark {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.fa-xmark:hover {
+    opacity: 0.8;
+}
+
+.showSub {
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: white;
+    border: black 1px solid;
+    padding: 10px;
+    overflow-y: auto;
+    /* border-radius: 8px; */
+}
 
 @media only screen and (max-width: 600px) {
     .main {
@@ -140,5 +189,9 @@ form input:focus {
 
     .alert {
         left: 20%;
+    }
+
+    .id {
+        display: none;
     }
 }

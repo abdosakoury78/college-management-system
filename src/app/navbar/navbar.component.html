@@ -5,8 +5,14 @@
         <div class="admin">
             <img src="../../assets/profile.jpg" alt="Profile">
             <div class="adminName">
-                <p>Name</p>
-                <p>Admin</p>
+                @if (loginService.isAdmin) {
+                    <p>admin</p>
+                    <p>Admin</p>
+                }
+                @else {
+                    <p>{{loginService.student.name}}</p>
+                    <p>Student</p>
+                }
             </div>
         </div>
     </div>

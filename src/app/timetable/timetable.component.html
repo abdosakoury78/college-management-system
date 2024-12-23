@@ -1,51 +1,71 @@
-<section class="timetable">
+<section class="courses">
     <div class="main">
         <app-navbar></app-navbar>
 
-        <!-- TimeTable Section -->
-        <div class="container mt-5">
-            <h1 class="text-center mb-4">TimeTable</h1>
-            <form action="">
-                <div class="row">
-                    <!-- First Term Column -->
-                    <div class="col-md-6">
-                        <h3 class="text-center">First Term</h3>
-                        <div class="mb-3">
-                            <label for="sem1-start" class="form-label">Beginning of First Semester</label>
-                            <input type="text" class="form-control" id="sem1-start" value="5-09-2024">
-                        </div>
-                        <div class="mb-3">
-                            <label for="midterm1" class="form-label">Midterm</label>
-                            <input type="text" class="form-control" id="midterm1" value="15-10-2024">
-                        </div>
-                        <div class="mb-3">
-                            <label for="final1" class="form-label">Final Exams</label>
-                            <input type="text" class="form-control" id="final1" value="25-12-2024">
-                        </div>
-                    </div>
-                    <!-- Second Term Column -->
-                    <div class="col-md-6">
-                        <h3 class="text-center">Second Term</h3>
-                        <div class="mb-3">
-                            <label for="sem2-start" class="form-label">Beginning of Second Semester</label>
-                            <input type="text" class="form-control" id="sem2-start" value="29-01-2025">
-                        </div>
-                        <div class="mb-3">
-                            <label for="midterm2" class="form-label">Midterm</label>
-                            <input type="text" class="form-control" id="midterm2" value="15-02-2025">
-                        </div>
-                        <div class="mb-3">
-                            <label for="final2" class="form-label">Final Exams</label>
-                            <input type="text" class="form-control" id="final2" value="25-04-2025">
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center mt-4">
-                    <button type="button" class="btn btn-dark">Save</button>
+        @if(loginService.isAdmin) {
+        <!-- student settings -->
+        <div class="container setting">
+            <button class="btn btn-dark" (click)="showForm(form, $event, name, hours)">Add</button>
+            <button class="btn btn-dark del" (click)="delCard(form, $event)">Delete</button>
+        </div>
+        }
+
+        <!-- form for teacher -->
+        <div class="form" #form>
+            <form action="" (submit)="onSubmit($event)">
+                <p>{{title}} Course</p>
+                <input type="text" name="name" id="name" placeholder="Name" autocomplete="off" #name>
+                <input type="text" name="hours" id="hours" placeholder="Hours" autocomplete="off" #hours>
+                <select class="form-select" style="width: fit-content;" aria-label="Default select example" (change)="selectBatch2($event)" #batchId>
+                    <option selected class="fw-bold">Select Batch</option>
+                    @for (batch of batches.batches; track $index) {
+                        <option [value]="batch.id">{{batch.name}}</option>
+                    }
+                </select>
+                <div class="btns">
+                    <button class="btn btn-dark">{{btn}}</button>
+                    <button class="btn btn-dark del ms-4" (click)="showForm(form, $event, name, hours)">Cancel</button>
                 </div>
             </form>
         </div>
 
 
+        <!-- alert -->
+        <div class="alert alert-dark alert-dismissible fade show" role="alert" [style.transform]="alert ? 'translateY(50px)' : 'translateY(-100px)'">
+            {{sentence}}
+            <button type="button" class="btn-close" (click)="closeAlert()"></button>
+        </div>
+
+
+        <!-- table for teachers -->
+        @if (loginService.isAdmin) {
+            <div class="container teacher-table">
+                <div class="details">
+                    <p class="ms-3">Name</p>
+                    <p class="me-3">Batch</p>
+                </div>
+                @for (course of courses.courses; track $index) {
+                    <div class="table" (click)="cardClicked(course)" [style.boxShadow]="selectedDiv === course.id ? '5px 2px 15px 2px black' : ''" >
+                        <p class="ms-2"><span>{{$index + 1}}</span> {{course.title}}</p>
+                        <p class="me-2">{{course.batchName}}</p>
+                    </div>
+                }
+            </div>
+        } @else {
+            <div class="container teacher-table">
+                <div class="details">
+                    <p class="ms-3">Name</p>
+                    <p class="me-3">Batch</p>
+                </div>
+                @for (course of courses.courses; track $index; let e = $index) {
+                    @if(course.batchName === loginService.student.batchName) {
+                        <div class="table">
+                            <p class="ms-2"><span>{{e}}</span> {{course.title}}</p>
+                            <p class="me-2">{{course.batchName}}</p>
+                        </div>
+                    }
+                }
+            </div>
+        }
     </div>
 </section>

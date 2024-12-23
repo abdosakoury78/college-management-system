@@ -3,33 +3,53 @@
             <img src="../../assets/Helwan.png" alt="Helwan University">
             <div class="icon">
                 <i class="fa-solid fa-house"></i>
-                <a routerLink="/admin-dashboard">Dashboard</a>
+                <a routerLink="/dashboard">Dashboard</a>
             </div>
-            <div class="icon">
-                <i class="fa-solid fa-graduation-cap"></i>
-                <a routerLink="/students">Students</a>
-            </div>
+            @if(loginService.isAdmin) {
+                <div class="icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <a routerLink="/students">Students</a>
+                </div>
+            } @else {
+                <div class="icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <a routerLink="/student">Student</a>
+                </div>
+            }
             <div class="icon">
                 <i class="fa-solid fa-user-group"></i>
-                <a routerLink="/teachers">Teachers</a>
+                <a routerLink="/teachers">Professors</a>
             </div>
             <div class="icon">
-                <i class="fa-solid fa-table"></i>
-                <a routerLink="/timetable">TimeTable</a>
+                <i class="fa-solid fa-book"></i>
+                <a routerLink="/courses">Courses</a>
             </div>
             <div class="icon">
                 <i class="fa-solid fa-pen-to-square"></i>
-                <a>Announcements</a>
+                <a routerLink="/exams">Exams</a>
             </div>
+            @if(loginService.isAdmin) {
+                <div class="icon">
+                    <i class="fa-solid fa-table"></i>
+                    <a routerLink="/batches">Batches</a>
+                </div>
+            }
         </div>
         <div class="cont">
-            <div class="icon">
-                <i class="fa-solid fa-circle-info"></i>
-                <a>Help</a>
-            </div>
+            @if (loginService.isAdmin) {
+                <div class="icon">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <a routerLink="/help">Help</a>
+                </div>
+            } @else {
+                <div class="icon">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <a routerLink="/Help">Help</a>
+                </div>
+            }
             <div class="icon">
                 <i class="fa-solid fa-right-from-bracket"></i>
-                <a>Logout</a>
+                <a routerLink="" (click)="logout()">Logout</a>
             </div>
         </div>
 </section>

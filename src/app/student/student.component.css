@@ -1,0 +1,141 @@
+.student {
+    width: 100%;
+    background-color: #ebecee;
+    min-height: 100vh;
+}
+
+.main {
+    margin-left: 13%;
+}
+
+
+.studentCard {
+    width: 400px;
+    /* padding: 20px; */
+    border: 1px solid black;
+    height: fit-content;
+    position: relative;
+    background-color: #f5f4f4;
+    transition: 0.5s;
+}
+
+.studentCard:hover {
+    outline: 1px solid black;
+}
+
+.studentCard .img {
+    width: 100%;
+    background-color: black;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.studentCard img {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 100px;
+}
+
+.qrCode {
+    background-color: black;
+    width: 200px;
+    height: 30px;
+    align-self: center;
+    justify-self: center;
+    margin-bottom:15px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.line {
+    background-color: #f5f4f4;
+    height: 100%;
+    /* width: 1px; */
+}
+
+.del {
+    color: black;
+    background-color: white;
+    outline: black solid 1px;
+    transition: 0.3s;
+}
+
+.del:hover {
+    color: white;
+    background-color: black;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.form {
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    width: 370px;
+}
+
+.form p {
+    color: black;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: solid black 1px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+form div {
+    display: flex;
+    justify-content: center;
+    /* background-color: blue; */
+    width: 100%;
+}
+
+form div label {
+    justify-self: flex-start;
+    margin-right: 10px;
+    /* background-color: red; */
+    width: 120px;
+    margin-top: 5px;
+    /* text-align: center; */
+}
+
+form div input {
+    /* background-color: blue; */
+    width: 200px;
+    padding: 5px 10px;
+}
+
+.form .btns {
+    width: auto;
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    .main {
+        margin: 0;
+        width: 100vw;
+    }
+
+    .alert {
+        left: 20%;
+    }
+
+    form div:nth-child(4) label{
+        width: 80px;
+        /* background-color: red; */
+    }
+}

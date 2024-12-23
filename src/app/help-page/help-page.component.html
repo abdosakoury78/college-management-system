@@ -1,0 +1,42 @@
+<section class="help">
+    <div class="main">
+        <app-navbar></app-navbar>
+
+        <h1 class="text-center mes">Messages</h1>
+        <!-- messages div -->
+        <div class="container page">
+            <div class="contaienr messages">
+                @for (help of helpMes; track $index) {
+                    @for (student of students; track $index) {
+                        @if (help.studentId === student.id) {
+                            <div class="mb-3" (click)="clickMess(student, help)">
+                                <p class="table me-3 mt-3"><strong>From:</strong> {{student.name}}</p>
+                                <i class="fa-solid fa-trash" (click)="delCard(help)"></i>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+            <div></div>
+            @if (messClicked) {
+                <div class="message">
+                    <div class="messageDiv">
+                        <div>
+                            <p class="me-3"><strong>Name:</strong> {{studnett.name}}</p>
+                            <p><strong>ID:</strong> {{studnett.id}}</p>
+                            <p class="me-3"><strong>Email:</strong> {{studnett.email}}</p>
+                            <p><strong>BatchName:</strong> {{studnett.batchName}}</p>
+                        </div>
+                        <div>
+                            <img src="../../assets/Helwan.png" alt="Helwan University">
+                        </div>
+                    </div>
+                    <p><strong>Message:</strong> {{help.message}}</p>
+                </div>
+            } @else {
+                <div></div>
+                <div></div>
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,100 @@
+.help {
+    width: 100%;
+    background-color: #ebecee;
+    min-height: 100vh;
+}
+
+.main {
+    margin-left: 13%;
+}
+
+.page {
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+    /* background-color: red; */
+    height: 70vh;
+    padding: 40px 10px 0;
+    position: relative;
+}
+
+
+
+.mes {
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.mes::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    background-color: black;
+    height: 1px;
+    bottom: 0;
+    left: 50%;
+    transition: 0.3s;
+}
+
+.mes::before {
+    content: "";
+    position: absolute;
+    width: 30px;
+    background-color: black;
+    height: 1px;
+    bottom: 0;
+    right: 50%;
+    transition: 0.3s;
+}
+
+.mes:hover::after,
+.mes:hover::before {
+    width: 50px;
+}
+
+form {
+    background-color: white;
+    justify-content: center;
+    padding: 20px 20px;
+    border-radius: 8px;
+    height: fit-content;
+}
+
+.btn {
+    justify-content: center;
+}
+form input,
+form textarea {
+    padding: 10px 0;
+    color: #777777;
+    /* outline: none; */
+    border: 1px solid #777777;
+}
+
+form textarea {
+    height: 200px;
+}
+form input:focus,
+form textarea:focus {
+    outline: black 1px solid;
+    /* border: 1px solid black; */
+}
+
+/* alert */
+.alert {
+    position: absolute;
+    top: 0;
+    left: 40%;
+    transition: 0.3s;
+    z-index: 99;
+}
+@media only screen and (max-width: 600px) {
+    .main {
+        margin: 0;
+        width: 100vw;
+    }
+
+    .alert {
+        left: 20%;
+    }
+}

@@ -1,13 +1,17 @@
 <section class="adminPage">
-    <div class="admin-cont">
-        <section class="main">
+    <div class="main">
             <app-navbar></app-navbar>
             <!-- welcome part -->
             <div class="welcomeCont">
                 <div class="container">
                     <div class="welcome">
                         <p>{{formattedDate}}</p>
-                        <h1>Welcome back, Name!</h1>
+                        @if (loginServic.isAdmin) {
+                            <h1>Welcome back, admin!</h1>
+                        }
+                        @else{
+                            <h1>Welcome back, {{loginServic.student.name}}!</h1>
+                        }
                         <p>Always Stay Updated.</p>
                     </div>
                 </div>
@@ -46,6 +50,5 @@
                                 </div>
                 </div>
             </div>
-        </section>
     </div>
 </section>

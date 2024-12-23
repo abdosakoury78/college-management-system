@@ -51,7 +51,9 @@
     transition: 0.5s;
     z-index: 99;
 }
-
+.form-select {
+    width: fit-content;
+}
 form {
     width: 400px;
     height: 500px;
@@ -144,6 +146,7 @@ form input:focus {
     top: 0;
     left: 40%;
     transition: 0.3s;
+    z-index: 99;
 }
 
 

@@ -1,0 +1,58 @@
+<section class="courses">
+    <div class="main">
+        <app-navbar></app-navbar>
+
+        @if(loginService.isAdmin){
+        <!-- student settings -->
+        <div class="container setting">
+            <button class="btn btn-dark" (click)="showForm(form, $event, duration)">Add</button>
+            <!-- <button class="btn btn-dark" (click)="update(form, $event)">Update</button> -->
+            <button class="btn btn-dark del" (click)="delCard(form, $event)">Delete</button>
+        </div>
+        }
+
+        <!-- form for teacher -->
+        <div class="form" #form>
+            <form action="" (submit)="onSubmit($event)">
+                <p>{{title}} Batch</p>
+                <select class="form-select" style="width: fit-content;" aria-label="Default select example" (change)="selectBatch2($event)" #batchId>
+                    <option selected class="fw-bold">Select Year</option>
+                    @for (batch of batches.batches; track $index) {
+                        <option [value]="batch.year">{{batch.year}}</option>
+                    }
+                </select>
+                <input type="text" name="name" id="name" placeholder="Name" autocomplete="off" #duration [value]="selectedTeacher?.name">
+                <div class="btns">
+                    <button class="btn btn-dark">{{btn}}</button>
+                    <button class="btn btn-dark del ms-4" (click)="showForm(form, $event, duration)">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+
+        <!-- alert -->
+        <div class="alert alert-dark alert-dismissible fade show" role="alert" [style.transform]="alert ? 'translateY(50px)' : 'translateY(-100px)'">
+            {{sentence}}
+            <button type="button" class="btn-close" (click)="closeAlert()"></button>
+        </div>
+
+
+        <!-- table for teachers -->
+        @if (loginService.isAdmin) {
+            <div class="container teacher-table">
+                <div class="details">
+                    <p class="ms-3">Name</p>
+                    <p class="me-2 ms-4">Total Students</p>
+                    <p>Year</p>
+                </div>
+                @for (batch of batches.batches; track $index) {
+                    <div class="table" (click)="cardClicked(batch)" [style.boxShadow]="selectedDiv === batch.id ? '5px 2px 15px 2px black' : ''" >
+                        <p class="ms-2"><span>{{$index + 1}}</span> {{batch.name}}</p>
+                        <p>{{batch.noOfStudents}}</p>
+                        <p>{{batch.year}}</p>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>

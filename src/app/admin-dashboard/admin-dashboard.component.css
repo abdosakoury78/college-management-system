@@ -1,14 +1,12 @@
 
-.main {
-    /* background-color: red; */
+.adminPage {
     width: 100%;
-    margin-left: 13.0%;
-    background-color: rgb(235, 236, 238);
+    background-color: #ebecee;
+    min-height: 100vh;
 }
 
-.admin-cont {
-    display: flex;
-    height: 100vh;
+.main {
+    margin-left: 13%;
 }
 
 /* welcomeCont */

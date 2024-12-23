@@ -3,16 +3,16 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { CoursesService } from '../services/courses.service';
 import { BatchesService } from '../services/batches.service';
 import { HttpClient } from '@angular/common/http';
+import { ExamsService } from '../services/exams.service';
 import { LoginService } from '../services/login.service';
-
 @Component({
-  selector: 'app-timetable',
+  selector: 'app-batch',
   standalone: true,
   imports: [NavbarComponent],
-  templateUrl: './timetable.component.html',
-  styleUrl: './timetable.component.css'
+  templateUrl: './batch.component.html',
+  styleUrl: './batch.component.css'
 })
-export class TimetableComponent implements OnInit{
+export class BatchComponent {
   showHideForm = false;
   title : any;
   btn : any;
@@ -20,17 +20,19 @@ export class TimetableComponent implements OnInit{
   clickCard = false;
   alert = false;
   sentence : string = "";
-  loginService = inject(LoginService);
   courses = inject(CoursesService);
   batches = inject(BatchesService);
+  exams = inject(ExamsService);
+  loginService = inject(LoginService);
   http = inject(HttpClient);
   batchSelected : string = "";
-  batchId : any;
   formData : any;
+  batchYear : any;
   selectedDiv: number | null = null;
   selectedTeacher : any;
-  products : any[] = [];
-  showForm(form : any, event : any, name : any, hours : any) {
+
+
+  showForm(form : any, event : any,  duration : any) {
     event.preventDefault();
     this.title = event.target.textContent;
     this.btn = event.target.textContent;
@@ -45,8 +47,7 @@ export class TimetableComponent implements OnInit{
     this.selectedTeacher = null;
     this.clickCard = false;
     this.selectedDiv = null;
-    name.value = "";
-    hours.value = "";
+    duration.value = "";
   }
 
   update(form : any, event : any) {
@@ -70,6 +71,26 @@ export class TimetableComponent implements OnInit{
     this.showHideForm = !this.showHideForm;
   }
 
+  onSubmit(event : any) {
+    event.preventDefault();
+    this.formData = new FormData(event.target);
+    const studentData = {
+      name: this.formData.get("name"),
+      year: this.batchYear,
+    };
+
+
+    if (this.btn === "Add") {
+      // Add student (POST request)
+      this.http.post("http://computerenginners-hu.runasp.net/api/Batchs", studentData).subscribe(res => {
+        console.log('Student added:', res);
+        this.batches.fetchData();
+        this.alert = true;
+        this.sentence = "You Added Successfully.";
+      });
+    }
+  }
+
   closeAlert() {
     this.alert = false;
   }
@@ -80,45 +101,19 @@ export class TimetableComponent implements OnInit{
     this.selectedTeacher = teacher;
   }
 
-  onSubmit(event : any) {
-    event.preventDefault();
-    this.formData = new FormData(event.target);
-    const teacherData = {
-      title: this.formData.get("name"),
-      hours: this.formData.get("hours"),
-      batchId: this.batchId
-    };
-
-    if (this.btn === "Add") {
-      // Add student (POST request)
-      this.http.post('http://computerenginners-hu.runasp.net/api/Courses', teacherData).subscribe({
-        next: (response) => {
-          console.log('Success:', response);
-          this.courses.fetchData();
-          this.batches.fetchData();
-          this.alert = true;
-          this.sentence = "You Added Successfully.";
-        },
-        error: (error) => {
-          console.error('Error:', error.error);
-        }
-      });
-
-    }
+  selectBatch2(course : any) {
+    this.batchYear = course.target.value;
   }
 
-  selectBatch2(batch : any) {
-    this.batchId = batch.target.value;
-  }
   delCard(form : any, event : any) {
     event.preventDefault();
     this.title = event.target.textContent;
     this.btn = event.target.textContent;
     if(this.clickCard) {
       this.alert = false;
-      this.http.delete("http://computerenginners-hu.runasp.net/api/Courses?id="+ this.selectedTeacher.id).subscribe(res => {
+      this.http.delete("http://computerenginners-hu.runasp.net/api/Batchs?id="+ this.selectedTeacher.id).subscribe(res => {
         console.log(res);
-        this.courses.courses = this.courses.courses.filter(student => student.id !== this.selectedTeacher.id);
+        this.batches.fetchData();
       });
     } else {
       this.alert = true;
@@ -129,5 +124,6 @@ export class TimetableComponent implements OnInit{
   ngOnInit(): void {
     this.courses.fetchData();
     this.batches.fetchData();
+    this.exams.fetchData();
   }
 }

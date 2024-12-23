@@ -1,0 +1,48 @@
+<section class="student">
+    <div class="main">
+        <app-navbar></app-navbar>
+        <div class="container mt-5">
+            <div class="studentCard mb-5">
+                <div class="img">
+                </div>
+                <p class="ms-3 fw-bold">2024-2025</p>
+                <p class="ms-3"><strong>Name:</strong> {{logicSer.student.name}}</p>
+                <p class="ms-3"><strong>ID:</strong> {{logicSer.student.id}}</p>
+                <p class="ms-3"><strong>Year:</strong> {{logicSer.student.batchYear}}</p>
+                <p class="ms-3"><strong>Batch:</strong> {{logicSer.student.batchName}}</p>
+                <hr>
+                <div class="qrCode">
+                    @for (line of qrLines; track $index) {
+                        <div class="line" [style.width.px] = "line"></div>
+                    }
+                </div>
+                <img src="../../assets/Helwan.png" alt="">
+            </div>
+            <div class="form">
+                <p>Profile Info</p>
+                <form action="" (submit)="onSubmit($event)">
+                    <div>
+                        <label for="" style="text-align: end; margin-left: -50px;">Email:</label>
+                        <input type="text" name="email" id="email" [value]="logicSer.student.email" disabled>
+                    </div>
+                    <div>
+                        <label for="" style="text-align: end; margin-left: -50px;">Name:</label>
+                        <input type="text" name="name" id="name" [value]="logicSer.student.name">
+                    </div>
+                    <div>
+                        <label for="" style="text-align: end; margin-left: -50px;">Passwrod:</label>
+                        <input type="text" name="password" id="password" [value]="logicSer.student.password">
+                    </div>
+                    <div>
+                        <label for="" style="text-align: end; margin-left: -50px;" >Phone Number:</label>
+                        <input type="text" name="phone" id="phone" [value]="logicSer.student.phoneNum">
+                    </div>
+                    <div class="btns">
+                        <button class="btn btn-dark" (click)="click($event)">Save</button>
+                        <button class="btn ms-3 del" (click)="click($event)">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -2,24 +2,53 @@
     <div class="main">
         <app-navbar></app-navbar>
 
-        <!-- student settings -->
-        <div class="container setting">
-            <button class="btn btn-dark" (click)="showForm(form, $event)">Add</button>
-            <button class="btn btn-dark" (click)="update(form, $event)">Update</button>
-            <button class="btn btn-dark del" (click)="delCard(form, $event)">Delete</button>
-        </div>
+        <!-- teacher settings -->
+        @if(loginSer.isAdmin) {
+            <div class="container setting">
+                <button class="btn btn-dark" (click)="showForm(form, $event, name, email)">Add</button>
+                <button class="btn btn-dark" (click)="update(form, $event)">Update</button>
+                <button class="btn btn-dark del" (click)="delCard($event)">Delete</button>
+            </div>
+        }
 
         <!-- form for teacher -->
         <div class="form" #form>
-            <form action="">
-                <p>{{title}} Teacher</p>
-                <input type="text" name="name" id="name" placeholder="Name" autocomplete="off">
-                <input type="email" name="email" id="email" placeholder="Email" autocomplete="off">
-                <input type="text" name="password" id="password" placeholder="Password" autocomplete="off">
-                <input type="text" name="subject" id="subject" placeholder="Subject" autocomplete="off">
+            <form action="" (submit)="onSubmit($event)">
+                <p>{{title}} Professor</p>
+                <input type="text" name="name" id="name" placeholder="Name" autocomplete="off" [value]= "selectedTeacher?.name" #name>
+                <input type="email" name="email" id="email" placeholder="Email" autocomplete="off" [value]= "selectedTeacher?.email" #email>
                 <div class="btns">
                     <button class="btn btn-dark">{{btn}}</button>
-                    <button class="btn btn-dark del ms-4" (click)="showForm(form, $event)">Cancel</button>
+                    <button class="btn btn-dark del ms-4" (click)="showForm(form, $event, name, email)">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- form for assign subject -->
+        <div class="form" #form2>
+            <form action="" (submit)="onSubmit2($event)">
+                <p>Assign Subject</p>
+                <select class="form-select" style="width: fit-content;" aria-label="Default select example" (change)="selectBatch2($event)" #batchId>
+                    <option [value]="0" selected class="fw-bold">Assign Subject</option>
+                    @for (course of courses.courses; track $index) {
+                        <option [value]="course.id">{{course.title}}</option>
+                    }
+                </select>
+                <div class="showSub">
+                    @for (assignSub of assignSub.assignmentSub; track $index) {
+                        @if (selectedDiv === assignSub.doctorId) {
+                            <div class="subject" [style.outline]="selectedSub === assignSub.courseName? '1px solid black' : ''" (click)="cardClicked2(assignSub)">
+                                <p style="font-size: 15px;">{{assignSub.courseName}}</p>
+                            </div>
+                            <i class="fa-solid fa-xmark" (click)="delAssign()"></i>
+                        }
+                    }
+                    <!-- <p style="margin-left: 8px; font-size: 18px; font-weight: bold;">You Should Add Subjects.</p> -->
+                </div>
+                <div class="btns">
+                    <button class="btn btn-dark me-2">Add</button>
+                    <!-- <button class="btn btn-dark ms-3" >Delete</button> -->
+                    <button class="btn btn-dark del ms-4" (click)="cancelForm(form2, $event)">Cancel</button>
                 </div>
             </form>
         </div>
@@ -33,57 +62,46 @@
 
 
         <!-- table for teachers -->
-        <div class="container teacher-table">
-            <div class="details">
-                <p class="ms-3">Name</p>
-                <p class="">ID</p>
-                <p class="me-2">Subject</p>
+        @if(loginSer.isAdmin) {
+            <div class="container teacher-table">
+                <div class="details">
+                    <p class="ms-3">Name</p>
+                    <p class="me-2 id">ID</p>
+                    <p class="me-2">Email</p>
+                </div>
+                @for (teacher of products; track $index) {
+                    <div [style.boxShadow]="selectedDiv === teacher.id ? '5px 2px 15px 2px black' : ''" class="table" (click)="cardClicked(teacher)" (dblclick)="showForm2(form2, teacher)" (touchend)="onDoubleTap(form2, teacher)">
+                        <p class="ms-2"><span>{{$index + 1}}</span> {{teacher?.name}}</p>
+                        <p class="me-2 id">{{teacher?.id}}</p>
+                        <p>{{teacher?.email}}</p>
+                    </div>
+                }
             </div>
-            <div class="table" (click)="cardClicked()">
-                <p class="ms-2"><span>1</span> Ali Ahmad</p>
-                <p class="ms-5">1001</p>
-                <p>Software Engineering</p>
+        } @else {
+            <div class="container teacher-table">
+                <div class="details">
+                    <p class="ms-3">Name</p>
+                    <p class="me-2">Email</p>
+                    <p class="me-2">Course</p>
+                </div>
+                @for (course of courses.courses; track $index) {
+                    @if(course.batchName === loginSer.student.batchName) {
+                        @for (assignSubject of assignSub.assignmentSub; track $index) {
+                            @if (assignSubject.courseId === course.id) {
+                                <div class="table">
+                                    <p class="ms-2"><span>{{$index + 1}}</span> {{assignSubject?.doctorName}}</p>
+                                    @for (doctor of products; track $index) {
+                                        @if (assignSubject.doctorId === doctor.id) {
+                                            <p>{{doctor?.email}}</p>
+                                        }
+                                    }
+                                    <p class="me-2">{{assignSubject?.courseName}}</p>
+                                </div>
+                            }
+                        }
+                    }
+                }
             </div>
-            <div class="table">
-                <p class="ms-2"><span>1</span> Ali Ahmad</p>
-                <p class="ms-5">1001</p>
-                <p>Software Engineering</p>
-            </div>
-            <div class="table">
-                <p class="ms-2"><span>1</span> Ali Ahmad</p>
-                <p class="ms-5">1001</p>
-                <p>Software Engineering</p>
-            </div>
-            <div class="table">
-                <p class="ms-2"><span>1</span> Ali Ahmad</p>
-                <p class="ms-5">1001</p>
-                <p>Software Engineering</p>
-            </div>
-            <div class="table">
-                <p class="ms-2"><span>1</span> Ali Ahmad</p>
-                <p class="ms-5">1001</p>
-                <p>Software Engineering</p>
-            </div>
-            <div class="table">
-                <p class="ms-2"><span>1</span> Ali Ahmad</p>
-                <p class="ms-5">1001</p>
-                <p>Software Engineering</p>
-            </div>
-            <div class="table">
-                <p class="ms-2"><span>1</span> Ali Ahmad</p>
-                <p class="ms-5">1001</p>
-                <p>Software Engineering</p>
-            </div>
-            <div class="table">
-                <p class="ms-2"><span>1</span> Ali Ahmad</p>
-                <p class="ms-5">1001</p>
-                <p>Software Engineering</p>
-            </div>
-            <div class="table">
-                <p class="ms-2"><span>1</span> Ali Ahmad</p>
-                <p class="ms-5">1001</p>
-                <p>Software Engineering</p>
-            </div>
-        </div>
+        }
     </div>
 </section>

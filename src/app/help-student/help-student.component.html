@@ -1,0 +1,31 @@
+<section class="help">
+    <div class="main">
+        <app-navbar></app-navbar>
+
+        <h1 class="text-center mes">Messages</h1>
+        <!-- messages div -->
+        <div class="container page">
+            <div class="form">
+                <form class="row" (submit)="onSubmitMessage($event, nameInput, emailInput, messageInput)">
+                    <h2 class="text-center">Get In Info</h2>
+                    <input required class="col-12 p-2 mb-3" type="text" placeholder="Name" name="Name" #nameInput>
+                    <input required class="col-12 p-2 mb-3" type="text" name="Email" placeholder="Email" #emailInput>
+                    <textarea required class="col-12 p-2 mb-3" name="Message" placeholder="Message" #messageInput></textarea>
+                    <button class="btn btn-dark col-4 col-md-2">Submit</button>
+                </form>
+            </div>
+        </div>
+                <!-- alert -->
+                <div class="alert alert-dark alert-dismissible fade show" role="alert" [style.transform]="alert ? 'translateY(50px)' : 'translateY(-100px)'" >
+                    {{sentence}}
+                    <button type="button" class="btn-close" (click)="closeAlert()"></button>
+                </div>
+
+                <!-- spinner loading
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div> -->
+    </div>
+</section>

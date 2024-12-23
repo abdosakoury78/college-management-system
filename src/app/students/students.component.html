@@ -4,69 +4,82 @@
 
         <!-- student settings -->
         <div class="container setting">
-            <button class="btn btn-dark" (click)="showForm(form, $event)">Add</button>
+            <button class="btn btn-dark" (click)="showForm(form, $event, name, email, password)">Add</button>
             <button class="btn btn-dark" (click)="update(form, $event)">Update</button>
             <button class="btn btn-dark del" (click)="delCard(form, $event)">Delete</button>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Select All Batch</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <select class="form-select" aria-label="Default select example" (change)="selectBatch($event)" #batch>
+                <option selected class="fw-bold">Select All Batch</option>
+                @for (batch of batches.batches; track $index) {
+                    <option [value]="batch.name">{{batch.name}}</option>
+                }
             </select>
         </div>
 
         <!-- form for student -->
-        <div class="form" #form>
-            <form action="">
+        <div class="form" #form (submit)="onSubmit($event)">
+            <form action="" #formData>
                 <p>{{title}} Student</p>
-                <input type="text" name="name" id="name" placeholder="Name" autocomplete="off">
-                <input type="email" name="email" id="email" placeholder="Email" autocomplete="off">
-                <input type="text" name="password" id="password" placeholder="Password" autocomplete="off">
+                <input type="text" name="name" id="name" placeholder="Name" autocomplete="off" [value]= "selectedStudent?.name" #name>
+                <input type="email" name="email" id="email" placeholder="Email" autocomplete="off" [value]= "selectedStudent?.email" #email>
+                <input type="text" name="password" id="password" placeholder="Password" autocomplete="off" [value]= "selectedStudent?.password" #password>
+                @if (isSelect) {
+                    <select class="form-select" aria-label="Default select example" (change)="selectBatch2($event)" #batchId>
+                        <option selected class="fw-bold">Select Batch</option>
+                        @for (batch of batches.batches; track $index) {
+                            <option [value]="batch.id">{{batch.name}}</option>
+                        }
+                    </select>
+                }
                 <div class="btns">
                     <button class="btn btn-dark">{{btn}}</button>
-                    <button class="btn btn-dark del ms-4" (click)="showForm(form, $event)">Cancel</button>
+                    <button class="btn btn-dark del ms-4" (click)="showForm(form, $event, name, email, password)">Cancel</button>
                 </div>
             </form>
         </div>
 
         <!-- students show part -->
         <div class="container studentsCard">
-            <div class="studentCard" #card (click)="cardClicked()">
-                <div class="img">
+            @for (student of products; track $index) {
+                @if (batchSelected === "" || batchSelected === "Select All Batch") {
+                    <div class="studentCard" #card (click)="cardClicked(student)" [style.outline]="selectedDiv === student.id ? '1px solid black' : ''">
+                    <div class="img">
+                    </div>
+                    <p class="ms-3 fw-bold">2024-2025</p>
+                    <p class="ms-3"><strong>Name:</strong> {{student?.name}}</p>
+                    <p class="ms-3"><strong>ID:</strong> {{student?.id}}</p>
+                    <p class="ms-3"><strong>Year:</strong> {{student?.batchYear}}</p>
+                    <p class="ms-3"><strong>Batch:</strong> {{student?.batchName}}</p>
+                    <hr>
+                    <div class="qrCode">
+                        @for (line of qrLines; track $index) {
+                            <div class="line" [style.width.px] = "initWidth($index)"></div>
+                        }
+                    </div>
+                    <img src="../../assets/Helwan.png" alt="">
                 </div>
-                <p class="ms-3 fw-bold">2024-2025</p>
-                <p class="ms-3"><strong>Name:</strong> Ahmad Ali</p>
-                <p class="ms-3"><strong>ID:</strong> 1000</p>
-                <p class="ms-3"><strong>Year:</strong> 3rd year</p>
-                <p class="ms-3"><strong>Major:</strong> Computer</p>
-                <hr>
-                <div class="qrCode">
-                    @for (line of qrLines; track $index) {
-                        <div class="line" [style.width.px] = "initWidth()"></div>
-                    }
+                } @else if (batchSelected === student?.batchName) {
+                <div class="studentCard" #card (click)="cardClicked(student)" [style.outline]="selectedDiv === student.id ? '1px solid black' : ''">
+                    <div class="img">
+                    </div>
+                    <p class="ms-3 fw-bold">2024-2025</p>
+                    <p class="ms-3"><strong>Name:</strong> {{student?.name}}</p>
+                    <p class="ms-3"><strong>ID:</strong> {{student?.id}}</p>
+                    <p class="ms-3"><strong>Year:</strong> {{student?.batchYear}}</p>
+                    <p class="ms-3"><strong>Batch:</strong> {{student?.batchName}}</p>
+                    <hr>
+                    <div class="qrCode">
+                        @for (line of qrLines; track $index) {
+                            <div class="line" [style.width.px] = "initWidth($index)"></div>
+                        }
+                    </div>
+                    <img src="../../assets/Helwan.png" alt="">
                 </div>
-                <img src="../../assets/Helwan.png" alt="">
-            </div>
-            <div class="studentCard">
-                <div class="img">
-                </div>
-                <p class="ms-3 fw-bold">2024-2025</p>
-                <p class="ms-3"><strong>Name:</strong> Ahmad Ali</p>
-                <p class="ms-3"><strong>ID:</strong> 1000</p>
-                <p class="ms-3"><strong>Year:</strong> 3rd year</p>
-                <p class="ms-3"><strong>Major:</strong> Computer</p>
-                <hr>
-                <div class="qrCode">
-                    @for (line of qrLines; track $index) {
-                        <div class="line" [style.width.px] = "initWidth()"></div>
-                    }
-                </div>
-                <img src="../../assets/Helwan.png" alt="">
-            </div>
+                }
+            }
         </div>
 
         <!-- alert -->
-        <div class="alert alert-dark alert-dismissible fade show" role="alert" [style.transform]="alert ? 'translateY(50px)' : 'translateY(-100px)'">
+        <div class="alert alert-dark alert-dismissible fade show" role="alert" [style.transform]="alert ? 'translateY(50px)' : 'translateY(-100px)'" >
             {{sentence}}
             <button type="button" class="btn-close" (click)="closeAlert()"></button>
         </div>

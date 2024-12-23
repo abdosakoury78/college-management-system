@@ -1,2 +1,3 @@
-<app-dashboard></app-dashboard>
-<router-outlet></router-outlet>
+<app-dashboard [style.display] = "loginService.isLogged? 'block': 'none' "></app-dashboard>
+<router-outlet [style.display] = "loginService.isLogged? 'block': 'none' "></router-outlet>
+<app-login [style.display] = "loginService.isLogged? 'none': 'block' "></app-login>
